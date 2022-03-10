@@ -1,20 +1,42 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-item lines="none">
+      <p>Today's Report</p>
+      <ion-label slot="end">{{ todayDate | date: "EEE dd MMM" }}</ion-label>
+    </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-item lines="none">
+      <span>
+        {{ ((weatherTemp?.temp - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F
+      </span>
+
+      <img slot="end" [src]="weatherIcon">
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="location"></ion-icon>
+      <span>{{ cityName }}</span>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <span>Today's High</span>
+      <span slot="end">{{ ((weatherTemp?.temp_max - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F</span>
+    </ion-item>
+
+    <ion-item>
+      <span>Today's Low</span>
+      <span slot="end">{{ ((weatherTemp?.temp_min - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F</span>
+    </ion-item>
+
+    <ion-item>
+      <span>Humidity</span>
+      <span slot="end">{{ weatherTemp?.humidity}}%</span>
+    </ion-item>
+  </ion-card>
 </ion-content>
