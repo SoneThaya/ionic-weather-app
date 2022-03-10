@@ -3,40 +3,54 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-item lines="none">
-      <p>Today's Report</p>
-      <ion-label slot="end">{{ todayDate | date: "EEE dd MMM" }}</ion-label>
-    </ion-item>
+  <div style="text-align: center; margin: 15px;">
+    <ion-label style="font-weight: 400; font-size: 1.5em;">Weather Forecast</ion-label>
+  </div>
+  <ion-searchbar [(ngModel)]="cityName" (ngModelChange)="loadData()" placeholder="Search for city" class="searchBar"
+    animated></ion-searchbar>
 
-    <ion-item lines="none">
-      <span>
-        {{ ((weatherTemp?.temp - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F
-      </span>
+  <div *ngIf="!loading">
 
-      <img slot="end" [src]="weatherIcon">
-    </ion-item>
 
-    <ion-item>
-      <ion-icon name="location"></ion-icon>
-      <span>{{ cityName }}</span>
-    </ion-item>
-  </ion-card>
+    <ion-card class="cardStyle">
+      <ion-item lines="none">
+        <p style="font-weight: 500; color: white;">Today's Report</p>
+        <ion-label id="date" slot="end">{{ todayDate | date: "EEE dd MMM" }}</ion-label>
+      </ion-item>
 
-  <ion-card>
-    <ion-item>
-      <span>Today's High</span>
-      <span slot="end">{{ ((weatherTemp?.temp_max - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F</span>
-    </ion-item>
+      <ion-item lines="none">
+        <span id="temp">
+          {{ ((weatherTemp?.temp - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F
+        </span>
 
-    <ion-item>
-      <span>Today's Low</span>
-      <span slot="end">{{ ((weatherTemp?.temp_min - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F</span>
-    </ion-item>
+        <img slot="end" width="140px" height="140px" [src]="weatherIcon">
+      </ion-item>
 
-    <ion-item>
-      <span>Humidity</span>
-      <span slot="end">{{ weatherTemp?.humidity}}%</span>
-    </ion-item>
-  </ion-card>
+      <ion-item>
+        <ion-icon id="locationIcon" name="location"></ion-icon>
+        <span>{{ cityName }}</span>
+      </ion-item>
+    </ion-card>
+
+    <ion-card class="cardStyle">
+      <ion-item>
+        <span>Today's High</span>
+        <span slot="end">{{ ((weatherTemp?.temp_max - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F</span>
+      </ion-item>
+
+      <ion-item>
+        <span>Today's Low</span>
+        <span slot="end">{{ ((weatherTemp?.temp_min - 273.15) * (9 / 5) + 32).toFixed(0) }}&deg;F</span>
+      </ion-item>
+
+      <ion-item>
+        <span>Humidity</span>
+        <span slot="end">{{ weatherTemp?.humidity}}%</span>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <div *ngIf="loading" class="noData">
+    <img src="../../assets/watch.png" alt="no data">
+  </div>
 </ion-content>

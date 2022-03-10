@@ -122,10 +122,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
@@ -135,13 +132,6 @@
             "devServerTarget": "app:serve"
           },
           "configurations": {
-            "localhost": {
-              "fileReplacements": [
-                  {
-                      "replace": "src/environments/environment.ts",
-                      "with": "src/environments/environment.localhost.ts"
-                  }
-              ],
             "production": {
               "devServerTarget": "app:serve:production"
             },
